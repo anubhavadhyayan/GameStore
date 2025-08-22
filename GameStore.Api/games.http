@@ -1,0 +1,32 @@
+GET http://localhost:5110
+
+###
+GET http://localhost:5110/games
+
+###
+GET http://localhost:5110/games/9
+
+###
+POST http://localhost:5110/games
+Content-Type: application/json
+
+{
+    "name" : "MineCraft",
+    "genre" : "Kids and Family",
+    "price" : 25.99,
+    "releaseDate" : "2012-11-18"
+}
+
+###
+PUT http://localhost:5110/games/5
+Content-Type: application/json
+
+{
+    "name" : "MineCraft",
+    "genre" : "Kids and Family - All Age",
+    "price" : 25.99,
+    "releaseDate" : "2012-11-18"
+}
+
+###
+DELETE  http://localhost:5110/games/2
