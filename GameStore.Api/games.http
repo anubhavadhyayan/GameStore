@@ -4,29 +4,29 @@ GET http://localhost:5110
 GET http://localhost:5110/games
 
 ###
-GET http://localhost:5110/games/9
+GET http://localhost:5110/games/4
 
 ###
 POST http://localhost:5110/games
 Content-Type: application/json
 
 {
-    "name" : "MineCraft",
-    "genre" : "Kids and Family",
-    "price" : 25.99,
-    "releaseDate" : "2012-11-18"
+    "name" : "Cars Combat II",
+    "genreId" : 4,
+    "price" : 80.00,
+    "releaseDate" : "2024-01-01"
 }
 
 ###
-PUT http://localhost:5110/games/5
+PUT http://localhost:5110/games/2
 Content-Type: application/json
 
 {
-    "name" : "MineCraft",
-    "genre" : "Kids and Family - All Age",
-    "price" : 25.99,
-    "releaseDate" : "2012-11-18"
+    "name" : "Cars Combat II",
+    "genreId" : 4,
+    "price" : 71.89,
+    "releaseDate" : "2023-01-01"
 }
 
 ###
-DELETE  http://localhost:5110/games/2
+DELETE  http://localhost:5110/games/4

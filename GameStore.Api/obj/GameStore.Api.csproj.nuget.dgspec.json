@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/home/anubhav/Programs/aspdotnetcore/GameStore/GameStore.Api/GameStore.Api.csproj": {}
+    "C:\\Users\\anubh\\Projects\\GameStore\\GameStore.Api\\GameStore.Api.csproj": {}
   },
   "projects": {
-    "/home/anubhav/Programs/aspdotnetcore/GameStore/GameStore.Api/GameStore.Api.csproj": {
+    "C:\\Users\\anubh\\Projects\\GameStore\\GameStore.Api\\GameStore.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/anubhav/Programs/aspdotnetcore/GameStore/GameStore.Api/GameStore.Api.csproj",
+        "projectUniqueName": "C:\\Users\\anubh\\Projects\\GameStore\\GameStore.Api\\GameStore.Api.csproj",
         "projectName": "GameStore.Api",
-        "projectPath": "/home/anubhav/Programs/aspdotnetcore/GameStore/GameStore.Api/GameStore.Api.csproj",
-        "packagesPath": "/home/anubhav/.nuget/packages/",
-        "outputPath": "/home/anubhav/Programs/aspdotnetcore/GameStore/GameStore.Api/obj/",
+        "projectPath": "C:\\Users\\anubh\\Projects\\GameStore\\GameStore.Api\\GameStore.Api.csproj",
+        "packagesPath": "C:\\Users\\anubh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\anubh\\Projects\\GameStore\\GameStore.Api\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/anubhav/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\anubh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,6 +51,16 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
             "MinimalApis.Extensions": {
               "target": "Package",
               "version": "[0.11.0, )"
@@ -68,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
