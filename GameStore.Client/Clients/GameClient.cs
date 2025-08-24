@@ -2,96 +2,24 @@ using System;
 using GameStore.Client.Models;
 namespace GameStore.Client.Clients;
 
-public class GameClient
+public class GameClient(HttpClient httpClient)
 {
-    private List<GameSummary> games = [
-        new() {
-            Id = 1,
-            Name = "Street Fighter II",
-            Genre = "Fighting",
-            Price = 19.99M,
-            ReleaseDate = new DateOnly(1998, 8, 31)
-        },
-        new() {
-            Id = 2,
-            Name = "Street Racer II",
-            Genre = "Racing",
-            Price = 39.99M,
-            ReleaseDate = new DateOnly(1999, 7, 11)
-        },
-        new() {
-            Id = 3,
-            Name = "Minecraft",
-            Genre = "Kids and Family",
-            Price = 49.99M,
-            ReleaseDate = new DateOnly(2008, 10, 25)
-        }
-    ];
-    public GameSummary[] GetGames() => [.. games];
+    
+    public async Task<GameSummary[]> GetGamesAsync()
+        => await httpClient.GetFromJsonAsync<GameSummary[]>("games") ?? [];
 
-    private readonly Genre[] genres = new GenresClient().GetGenres();
+    public async Task AddGameAsync(GameDetails gameDetails) =>
+        await httpClient.PostAsJsonAsync("games", gameDetails);
 
-    public void AddGame(GameDetails gameDetails)
-    {
-        Genre genre = GetGenreById(gameDetails.GenreId);
+    public async Task UpdateGameAsync(GameDetails updatedGame)
+        => await httpClient.PutAsJsonAsync($"games/{updatedGame.Id}", updatedGame);
 
-        var gameSummary = new GameSummary
-        {
-            Id = games.Count + 1,
-            Name = gameDetails.Name,
-            Genre = genre.Name,
-            Price = gameDetails.Price,
-            ReleaseDate = gameDetails.ReleaseDate,
-        };
-        games.Add(gameSummary);
-    }
 
-    private Genre GetGenreById(string? id)
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(id);
-        return genres.Single(genre => genre.Id == int.Parse(id));
-    }
+    public async Task<GameDetails> GetGameAsync(int id)
+        => await httpClient.GetFromJsonAsync<GameDetails>($"games/{id}")
+        ?? throw new Exception("Could not find your game!");
 
-    public void UpdateGame(GameDetails updatedGame)
-    {
-        var genre = GetGenreById(updatedGame.GenreId);
-        GameSummary existingGame = GetGameSummaryById(updatedGame.Id);
-        existingGame.Name = updatedGame.Name;
-        existingGame.Genre = genre.Name;
-        existingGame.Price = updatedGame.Price;
-        existingGame.ReleaseDate = updatedGame.ReleaseDate;
-    }
 
-    public GameDetails GetGame(int id)
-    {
-        GameSummary game = GetGameSummaryById(id);
-
-        var genre = genres.Single(genre => string.Equals(
-            genre.Name,
-            game.Genre,
-            StringComparison.OrdinalIgnoreCase));
-
-        return new GameDetails
-        {
-            Id = game.Id,
-            Name = game.Name,
-            GenreId = genre.Id.ToString(),
-            Price = game.Price,
-            ReleaseDate = game.ReleaseDate,
-        };
-
-    }
-
-    private GameSummary GetGameSummaryById(int id)
-    {
-        GameSummary? game = games.Find(game => game.Id == id);
-        ArgumentNullException.ThrowIfNull(game);
-        return game;
-    }
-
-    public void DeleteGame(int id)
-    {
-        var game = GetGameSummaryById(id);
-        games.Remove(game);
-    }
+    public async Task DeleteGameAsync(int id)
+        => await httpClient.DeleteAsync($"games/{id}");
 }
