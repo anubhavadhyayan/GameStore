@@ -23,17 +23,20 @@ jobs:
         with:
           dotnet-version: '9.x'
 
+      - name: Restore dependencies
+        run: dotnet restore GameStore.Client/GameStore.Client.csproj
+        
       - name: Build project
         run: dotnet build GameStore.Client/GameStore.Client.csproj --configuration Release
 
       - name: Publish project
-        run: dotnet publish GameStore.Client/GameStore.Client.csproj --configuration Release --output publish_output
+        run: dotnet publish GameStore.Client/GameStore.Client.csproj --configuration Release --output ./publish_output
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: publish_output
+          path: ./publish_output
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,6 +50,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
+          path: ./publish_output
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -61,6 +65,7 @@ jobs:
         with:
           app-name: 'anuweb'
           slot-name: 'Production'
-          package: .
+          package: ./publish_output
 
           
+
