@@ -23,17 +23,17 @@ jobs:
         with:
           dotnet-version: '9.x'
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+      - name: Build project
+        run: dotnet build GameStore.Client/GameStore.Client.csproj --configuration Release
 
-      - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      - name: Publish project
+        run: dotnet publish GameStore.Client/GameStore.Client.csproj --configuration Release --output publish_output
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: publish_output
 
   deploy:
     runs-on: ubuntu-latest
@@ -62,4 +62,5 @@ jobs:
           app-name: 'anuweb'
           slot-name: 'Production'
           package: .
+
           
